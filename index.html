@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSC-151 & DSC-152(A) Notes | B.Voc IT - 2nd Semester</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 90%;
+            width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        h1 {
+            color: #ffcc00;
+            font-size: 32px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        h2 {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        .input-container {
+            margin: 20px 0;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            width: 100%;
+        }
+        .download-link, .back-link {
+            display: inline-block;
+            background: #ffcc00;
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .download-link:hover, .back-link:hover {
+            background: #e6b800;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+        }
+        .author {
+            font-size: 18px;
+            color: #ffcc00;
+            background: rgba(255, 204, 0, 0.1);
+            padding: 8px 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        .welcome-message {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ffcc00;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 26px;
+            }
+            h2 {
+                font-size: 18px;
+            }
+            input, button {
+                font-size: 14px;
+            }
+            .download-link, .back-link {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h1>Department of B.Voc IT</h1>
+        <h2>2nd Semester Notes</h2>
+        
+        <div class="input-container">
+            <input type="text" id="username" placeholder="Enter your name">
+            <input type="text" id="rollno" placeholder="Enter your Roll Number">
+            <button onclick="login()">Proceed to Download</button>
+        </div>
+    </div>
+    
+    <div class="container" id="download-container" style="display: none;">
+        <div id="welcome-message" class="welcome-message"></div>
+        
+        <p>Click below to download the complete notes:</p>
+        <a href="DSC-151.pdf.pdf" download class="download-link">📥 Download DSC-151 Notes (PDF)</a>
+        <br><br>
+        <a href="DSC-152 (A).pdf.pdf" download class="download-link">📥 Download DSC-152 (A) Notes (PDF)</a>
+        <br><br>
+        <a href="index.html" class="back-link">⬅ Back to Home</a>
+        <br><br>
+        <div class="author">Designed by L. Milonjit Singha</div>
+    </div>
+    <div id="live-time" class="live-time"></div>
+
+    <script>
+        function updateTime() {
+            let now = new Date();
+            let timeString = now.toLocaleString();
+            document.getElementById("live-time").innerHTML = `📅 ${timeString}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+    <script>
+        function login() {
+            let name = document.getElementById("username").value;
+            let rollno = document.getElementById("rollno").value;
+            let allowedRollNumbers = ["242901", "242902", "242903", "242904", "242905", "242906", "242907", "242908", "242909", "242910", "242911", "242912", "242913", "242914", "242915", "242916", "242917", "242918", "242919", "242920","242921"];
+            
+            if (!name || !rollno) {
+                alert("Please enter both your Name and Roll Number");
+                return;
+            }
+            
+            if (!allowedRollNumbers.includes(rollno)) {
+                alert("Access Denied: Your Roll Number is not authorized to view this content.");
+                return;
+            }
+            
+            localStorage.setItem("username", name);
+            localStorage.setItem("rollno", rollno);
+            
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("download-container").style.display = "block";
+            document.getElementById("welcome-message").innerHTML = "Welcome, " + name + " (Roll No: " + rollno + ")!";
+        }
+    </script>
+</body>
+</html>
+
